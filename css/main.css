@@ -1,0 +1,35 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: lightblue
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+/*///////////////////////////////////////////// Grid \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\*/
+
+.grid-container {
+    height: 100vh;
+    display: grid;
+    grid-area: start;
+    grid-template-columns: repeat(auto-fit, minmax(25%, 1fr));
+    grid-template-rows: repeat(auto-fit, minmax(12.5%, 1fr));
+    justify-content: space-evenly;
+}
+
+.game div {
+    border: 1px solid black;
+    
+}
+
+.red {
+    background: red;
+}
+
