@@ -1,42 +1,60 @@
-let game = document.querySelectorAll('.game div');
-let counter = 0;
-let redCounter = document.querySelectorAll('.red');
-let redTab = [];
+let allBoxes = document.querySelectorAll('.game div')
+let game = document.querySelectorAll('.game div p');
+const wordTab = ["Tomek", "Romek", "Masza", "DJ Premier", "Piłka do kosza", "Telefon", "Szklanka", "Ferrari", "Tomek", "Romek", "Masza", "DJ Premier", "Piłka do kosza", "Telefon", "Szklanka", "Ferrari"];
+let question = document.querySelectorAll('.question')
+
+function shuffle(array) {
+    var currentIndex = array.length, temporaryValue, randomIndex;
+  
+    
+    while (0 !== currentIndex) {
+  
+      
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+  
+      
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }
+  
+    return array;
+  }
 
 
 
-function reverse() {
-    setTimeout(function() {
-        if (redTab.length == 2) {
-           game[0].classList.remove('red')
+function startGame(box, tab, pic) {
+    
+    for (let i = 0; i < tab.length; i++) {
+        box[i].innerText = tab[i]
+    };
+    setTimeout(function(){
+        for (let i = 0; i < pic.length; i++) {
+         pic[i].classList.remove('hidden')   
+        };
+        for (let i = 0; i < box.length; i++) {
+            box[i].classList.add('hidden')
         }
     }, 3000)
-}
-
-function counterReset() {
     
-    if (counter >= 2) {
-        counter = 0
-    }
-}
+};
 
-for (let i = 0; i < game.length; i++) {
-    game[i].addEventListener('click', function(e) {
-        e.preventDefault;
-        counter +=1;
-        
-        if (counter <= 2) {
-            this.classList.toggle('red');
-            redTab.push(this);
+shuffle(wordTab);
+startGame(game, wordTab, question);
+
+allBoxes.forEach(element => {
+    element.addEventListener('click', function(){
+        this.classList.add('open');
+        if (document.querySelectorAll('.open').length <= 2) {
+            this.querySelector('.question').classList.toggle('hidden');
+            this.querySelector('p').classList.toggle('hidden');
         };
-
-       
+        setTimeout(function(){
+            document.querySelectorAll('.open').forEach(element => {
+                element.classList.remove('open')
+            })
+        }, 3000) 
         
-        
-        
-    })
-    
-}
-
-counterReset();
-reverse();
+    })  
+});

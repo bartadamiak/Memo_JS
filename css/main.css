@@ -26,6 +26,11 @@ body {
 
 .game div {
     border: 1px solid black;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     
 }
 
@@ -33,3 +38,15 @@ body {
     background: red;
 }
 
+.green {
+    background: green;
+}
+
+.hidden {
+    display: none;
+}
+
+.question {
+    width: 30%;
+    text-align: center
+}
