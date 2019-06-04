@@ -1,7 +1,14 @@
-let allBoxes = document.querySelectorAll('.game div')
-let game = document.querySelectorAll('.game div p');
+const square = document.querySelectorAll('.game div');
+const boxes = document.querySelectorAll('.game div p');
+const startBtn = document.querySelector('.start');
+const gameSection = document.querySelector('.game');
+let opened = document.querySelectorAll('.open');
+const question = document.querySelectorAll('.question');
+const text = document.querySelectorAll('.text');
+
+
 const wordTab = ["Tomek", "Romek", "Masza", "DJ Premier", "Piłka do kosza", "Telefon", "Szklanka", "Ferrari", "Tomek", "Romek", "Masza", "DJ Premier", "Piłka do kosza", "Telefon", "Szklanka", "Ferrari"];
-let question = document.querySelectorAll('.question')
+
 
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
@@ -20,41 +27,61 @@ function shuffle(array) {
     }
   
     return array;
-  }
+}
+function textInBoxes(text, box) {
+    for (let i = 0; i < box.length; i++) {
+        box[i].innerText = text[i]
+    }
+}
 
-
-
-function startGame(box, tab, pic) {
+function hidden(obverse, reverse) {
     
-    for (let i = 0; i < tab.length; i++) {
-        box[i].innerText = tab[i]
-    };
     setTimeout(function(){
-        for (let i = 0; i < pic.length; i++) {
-         pic[i].classList.remove('hidden')   
-        };
-        for (let i = 0; i < box.length; i++) {
-            box[i].classList.add('hidden')
-        }
+        obverse.forEach(element => {
+            element.classList.add('hidden')
+        });
+        reverse.forEach(element => {
+            element.classList.remove('hidden')
+        });
     }, 3000)
     
+}
+
+function click (boxes) {
+    boxes.forEach(element => {
+        element.addEventListener('click', function(){
+            this.querySelector('.question').classList.add('hidden');
+            this.querySelector('.text').classList.remove('hidden')
+        })
+    });
 };
 
-shuffle(wordTab);
-startGame(game, wordTab, question);
 
-allBoxes.forEach(element => {
-    element.addEventListener('click', function(){
-        this.classList.add('open');
-        if (document.querySelectorAll('.open').length <= 2) {
-            this.querySelector('.question').classList.toggle('hidden');
-            this.querySelector('p').classList.toggle('hidden');
-        };
-        setTimeout(function(){
-            document.querySelectorAll('.open').forEach(element => {
-                element.classList.remove('open')
-            })
-        }, 3000) 
-        
-    })  
-});
+
+function startGame(button, game) {
+    button.addEventListener('click', function() {
+        this.classList.add('hidden');
+        game.classList.remove('hidden')
+
+    });
+    
+    shuffle(wordTab);
+    textInBoxes(wordTab, boxes);
+    hidden(text, question)
+    
+    click(square)
+}
+
+
+
+
+
+
+
+startGame(startBtn, gameSection)
+
+
+
+
+
+

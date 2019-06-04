@@ -44,9 +44,11 @@ body {
 
 .hidden {
     display: none;
+    
 }
 
 .question {
     width: 30%;
-    text-align: center
+    text-align: center;
+    transition: 2000;
 }
