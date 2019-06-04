@@ -1,8 +1,9 @@
-const square = document.querySelectorAll('.game div');
+const toClick = document.querySelectorAll('.question');
 const boxes = document.querySelectorAll('.game div p');
 const startBtn = document.querySelector('.start');
 const gameSection = document.querySelector('.game');
-let opened = document.querySelectorAll('.open');
+let opened = [];
+
 const question = document.querySelectorAll('.question');
 const text = document.querySelectorAll('.text');
 
@@ -28,11 +29,39 @@ function shuffle(array) {
   
     return array;
 }
+
+
+toClick.forEach(element => {
+    element.addEventListener('click', function(){
+        this.classList.add('hidden');
+        this.previousElementSibling.classList.remove('hidden');
+        opened.push(this.previousElementSibling.innerText);
+        console.log(opened);
+        if (opened.length == 2) {
+            if (opened[0] == opened[1]) {
+                opened.length = 0;
+            }
+             
+            
+        }
+    });
+    
+});
+
+
+
+
+
 function textInBoxes(text, box) {
     for (let i = 0; i < box.length; i++) {
         box[i].innerText = text[i]
     }
 }
+
+
+
+
+
 
 function hidden(obverse, reverse) {
     
@@ -43,19 +72,10 @@ function hidden(obverse, reverse) {
         reverse.forEach(element => {
             element.classList.remove('hidden')
         });
-    }, 3000)
+        
+    }, 7000)
     
 }
-
-function click (boxes) {
-    boxes.forEach(element => {
-        element.addEventListener('click', function(){
-            this.querySelector('.question').classList.add('hidden');
-            this.querySelector('.text').classList.remove('hidden')
-        })
-    });
-};
-
 
 
 function startGame(button, game) {
@@ -69,7 +89,7 @@ function startGame(button, game) {
     textInBoxes(wordTab, boxes);
     hidden(text, question)
     
-    click(square)
+    
 }
 
 
@@ -78,7 +98,7 @@ function startGame(button, game) {
 
 
 
-startGame(startBtn, gameSection)
+startGame(startBtn, gameSection);
 
 
 

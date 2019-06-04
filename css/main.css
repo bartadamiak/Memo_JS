@@ -5,7 +5,7 @@
 }
 
 body {
-    background: lightblue
+    background: rgb(110,10,14);
 }
 
 .container {
@@ -25,7 +25,7 @@ body {
 }
 
 .game div {
-    border: 1px solid black;
+    
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -47,8 +47,25 @@ body {
     
 }
 
+.text {
+    font-size: 2rem;
+    color: aliceblue;
+}
+
 .question {
     width: 30%;
     text-align: center;
-    transition: 2000;
+    color: aliceblue;
+    
+    
 }
+
+.question:hover {
+    width: 40%;
+}
+
+.start {
+    width: 100%;
+    
+}
+
