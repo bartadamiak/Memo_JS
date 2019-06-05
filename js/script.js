@@ -30,25 +30,41 @@ function shuffle(array) {
     return array;
 }
 
-
-toClick.forEach(element => {
-    element.addEventListener('click', function(){
-        this.classList.add('hidden');
-        this.previousElementSibling.classList.remove('hidden');
-        opened.push(this.previousElementSibling.innerText);
-        console.log(opened);
-        if (opened.length == 2) {
-            if (opened[0] == opened[1]) {
-                opened.length = 0;
-            }
-             
-            
-        }
-    });
+function click() {
+    toClick.forEach(element => {
     
-});
-
-
+        element.addEventListener('click', function(){
+            if (opened.length == 0 || opened.length == 1) {
+                this.classList.add('hidden');
+                this.previousElementSibling.classList.remove('hidden');
+                opened.push(this.previousElementSibling);
+                console.log(opened);
+            if (opened.length == 2) {
+                if (opened[0].innerText == opened[1].innerText) {
+                    opened.length = 0;
+                    console.log("Wygrałeś")
+                }
+                else {
+                    setTimeout(function(){
+                        opened[0].classList.add('hidden');
+                        opened[1].classList.add('hidden');
+                        opened[0].nextSibling.classList.remove('hidden');
+                        opened[1].nextSibling.classList.remove('hidden');
+                        opened.length = 0
+    
+                    }, 2000)
+                    console.log("przegrałeś")
+                }
+                 
+                
+            }
+    
+            }
+            
+        });
+        
+    });
+}
 
 
 
@@ -87,7 +103,8 @@ function startGame(button, game) {
     
     shuffle(wordTab);
     textInBoxes(wordTab, boxes);
-    hidden(text, question)
+    hidden(text, question);
+    click();
     
     
 }
