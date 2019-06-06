@@ -2,13 +2,16 @@ const toClick = document.querySelectorAll('.question');
 const boxes = document.querySelectorAll('.game div p');
 const startBtn = document.querySelector('.start');
 const gameSection = document.querySelector('.game');
+const startSection = document.querySelector('.start-section')
 let opened = [];
+let correct = [];
 
 const question = document.querySelectorAll('.question');
 const text = document.querySelectorAll('.text');
 
 
-const wordTab = ["Tomek", "Romek", "Masza", "DJ Premier", "Piłka do kosza", "Telefon", "Szklanka", "Ferrari", "Tomek", "Romek", "Masza", "DJ Premier", "Piłka do kosza", "Telefon", "Szklanka", "Ferrari"];
+const wordTab = ["Tomek", "Tomasz", "Tom", "DJ Premier", "Piłka do kosza", "Telefon", "Szklanka", "Ferrari", "Tomek", "Tomasz", "Tom", "DJ Premier", "Piłka do kosza", "Telefon", "Szklanka", "Ferrari"];
+
 
 
 function shuffle(array) {
@@ -30,6 +33,14 @@ function shuffle(array) {
     return array;
 }
 
+function end() {
+    if (correct.length == 16) {
+        gameSection.classList.add('hidden');
+        
+
+    }
+}
+
 function click() {
     toClick.forEach(element => {
     
@@ -41,8 +52,11 @@ function click() {
                 console.log(opened);
             if (opened.length == 2) {
                 if (opened[0].innerText == opened[1].innerText) {
+                    opened[0].style.color = "green";
+                    opened[1].style.color = "green";
+                    correct.push(opened[0]);
+                    correct.push(opened[1]);
                     opened.length = 0;
-                    console.log("Wygrałeś")
                 }
                 else {
                     setTimeout(function(){
@@ -53,11 +67,12 @@ function click() {
                         opened.length = 0
     
                     }, 2000)
-                    console.log("przegrałeś")
-                }
+                };
+
                  
                 
             }
+            end();
     
             }
             
@@ -94,9 +109,12 @@ function hidden(obverse, reverse) {
 }
 
 
+
 function startGame(button, game) {
     button.addEventListener('click', function() {
-        this.classList.add('hidden');
+        opened.length = 0;
+        correct.length = 0;
+        this.parentElement.style.display = 'none';
         game.classList.remove('hidden')
 
     });
@@ -105,6 +123,7 @@ function startGame(button, game) {
     textInBoxes(wordTab, boxes);
     hidden(text, question);
     click();
+    
     
     
 }
